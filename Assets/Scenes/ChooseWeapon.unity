@@ -394,6 +394,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1150047416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1150047417}
+  m_Layer: 0
+  m_Name: WILMAN SARAGIH SITIO
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1150047417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150047416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.119985014, y: 0.25242534, z: 0.004165745}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1312943068
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,11 +489,19 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
+    - - {x: 0.08364943, y: 0.40731466}
+      - {x: 0.0229249, y: 0.5258105}
+      - {x: -0.004823437, y: 0.526257}
+      - {x: -0.03652507, y: 0.5172661}
+      - {x: -0.08623521, y: 0.4079978}
+      - {x: -0.21989633, y: 0.2605567}
+      - {x: -0.2177698, y: 0.17715883}
+      - {x: -0.0603915, y: 0.19402668}
+      - {x: -0.054541126, y: 0.14150459}
+      - {x: 0.054278, y: 0.14260943}
+      - {x: 0.0632836, y: 0.20220238}
+      - {x: 0.21533486, y: 0.17133915}
+      - {x: 0.2180949, y: 0.26309377}
   m_UseDelaunayMesh: 0
 --- !u!50 &1312943070
 Rigidbody2D:
@@ -500,7 +539,7 @@ Transform:
   m_GameObject: {fileID: 1312943068}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -520,10 +559,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6c1991bb1a0c847a9c2c6738e7bc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: {x: 10, y: 10}
-  timeToFullSpeed: {x: 2, y: 2}
-  timeToStop: {x: 0, y: 0}
-  stopClamp: {x: 0, y: 0}
+  maxSpeed: {x: 7, y: 5}
+  timeToFullSpeed: {x: 1, y: 1}
+  timeToStop: {x: 0.5, y: 0.5}
+  stopClamp: {x: 2.5, y: 2.5}
 --- !u!114 &1312943073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,3 +756,4 @@ SceneRoots:
   - {fileID: 6581905381742655795}
   - {fileID: 619394802}
   - {fileID: 1312943071}
+  - {fileID: 1150047417}
