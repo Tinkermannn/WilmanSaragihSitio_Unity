@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -79,12 +80,14 @@ public class PlayerMovement : MonoBehaviour
                 Mathf.Abs(rb.velocity.y) < stopClamp.y ? 0 : rb.velocity.y + frictionY.y * Time.deltaTime
             );
         }
-
+        
         // Membatasi kecepatan masing-masing sumbu menggunakan Mathf.Clamp agar tidak melebihi maxSpeed
         float clampedX = Mathf.Clamp(rb.velocity.x, -maxSpeed.x, maxSpeed.x);
         float clampedY = Mathf.Clamp(rb.velocity.y, -maxSpeed.y, maxSpeed.y);
 
         rb.velocity = new Vector2(clampedX, clampedY);
+
+        MoveBound();
     }   
 
     // Fungsi untuk gaya gesek either saat bergerak atau berhenti
@@ -96,6 +99,29 @@ public class PlayerMovement : MonoBehaviour
         } else {
             return moveFriction * moveDirection;
         }
+    }
+
+    void MoveBound() {
+        // Sudut kiri bawah dan sudut kanan atas dari layar
+        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)); // Sudut kiri bawah layar
+        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)); // Sudut kanan atas layar
+
+        // Mengurangi batas horizontal untuk objek
+        max.x = max.x - 0.225f; // kanan
+        min.x = min.x + 0.225f; // kiri
+
+        // Mengurangi batas vertikal untuk objek
+        max.y = max.y - 0.55f; // ATAS
+        min.y = min.y + 0.1005f; // BAWAH
+
+        // Set posisi objek agar tetap berada dalam limit yang ditentukan
+        Vector2 camLimit = new Vector2(
+            Mathf.Clamp(transform.position.x, min.x, max.x), // Range posisi X
+            Mathf.Clamp(transform.position.y, min.y, max.y)  // Range posisi Y
+        );
+
+        // Update posisi objek sesuai dengan limit
+        transform.position = camLimit;
     }
 
     public bool IsMoving()

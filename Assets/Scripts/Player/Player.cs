@@ -10,19 +10,19 @@ public class Player : MonoBehaviour
     // Animator pada EngineEffect
     Animator animator;
 
-    // Satu instance singleton
-    public static Player instance {
-        get; // Properti instance dapat dibaca dari luar kelas
-        private set; // Diluar class tidak bisa merubah instance
+    // Satu Instance singleton
+    public static Player Instance {
+        get; // Properti Instance dapat dibaca dari luar kelas
+        private set; // Diluar class tidak bisa merubah Instance
     }
 
     // Method Awake untuk inisialitazion 
     private void Awake() {
-        // Mengecek jika sudah ada instance Player lain, keep singleton (1 instance)
-        if (instance != null && instance != this) {
+        // Mengecek jika sudah ada Instance Player lain, keep singleton (1 Instance)
+        if (Instance != null && Instance != this) {
             Destroy(this);
         } else {
-            instance = this; // Disimpan
+            Instance = this; // Disimpan
         }
     }
 
