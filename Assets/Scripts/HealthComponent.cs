@@ -2,24 +2,21 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField] private int maxHealth;
+    [SerializeField] private int maxHealth = 100;
     private int health;
 
-    // Initialize health with maxHealth
     void Awake()
     {
         health = maxHealth;
     }
 
-    // Getter for current health
+    // Getter untuk nilai health
     public int Health => health;
 
-    // Method to reduce health
+    // Mengurangi nilai health dan menghancurkan objek jika health <= 0
     public void Subtract(int damage)
     {
         health -= damage;
-
-        // Destroy the object if health reaches zero or below
         if (health <= 0)
         {
             Destroy(gameObject);

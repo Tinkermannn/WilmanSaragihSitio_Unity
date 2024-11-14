@@ -55,13 +55,20 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private Bullet CreateBullet()
+private Bullet CreateBullet()
+{
+    if (bulletPrefab == null)
     {
-        Bullet newBullet = Instantiate(bulletPrefab);
-        newBullet.SetPool(bulletPool);  // Pass pool reference for reuse
-        newBullet.gameObject.SetActive(false); // Start bullets as inactive
-        return newBullet;
+        Debug.LogError("Bullet prefab is not assigned!");
+        return null;
     }
+    
+    Bullet newBullet = Instantiate(bulletPrefab);
+    newBullet.SetPool(bulletPool);  // Pass pool reference for reuse
+    newBullet.gameObject.SetActive(false); // Start bullets as inactive
+    return newBullet;
+}
+
 
     private void OnTakeBulletFromPool(Bullet bullet)
     {

@@ -83,7 +83,7 @@ public class EnemyBoss : Enemy
         var bullet = bulletPool.Get();
         bullet.transform.position = bulletSpawnPoint.position;
         bullet.transform.rotation = bulletSpawnPoint.rotation;
-        bullet.Launch();
+        bullet.Launch(Vector2.down);
     }
 
     Bullet CreateBullet()

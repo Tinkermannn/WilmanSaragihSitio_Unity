@@ -1,21 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))] // Ensure the object has a Collider2D
+[RequireComponent(typeof(Collider2D), typeof(HealthComponent))]
 public class HitboxComponent : MonoBehaviour
 {
     private HealthComponent health;
 
     void Awake()
     {
-        // Get the HealthComponent on the same object
         health = GetComponent<HealthComponent>();
-        if (health == null)
-        {
-            Debug.LogError("HealthComponent not found on the object.");
-        }
     }
 
-    // Damage method accepting Bullet object
+    // Method overload untuk menerima damage dari objek Bullet
     public void Damage(Bullet bullet)
     {
         if (health != null)
@@ -24,7 +19,7 @@ public class HitboxComponent : MonoBehaviour
         }
     }
 
-    // Damage method accepting int value
+    // Method overload untuk menerima damage dalam bentuk integer
     public void Damage(int damage)
     {
         if (health != null)

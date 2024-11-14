@@ -15,34 +15,49 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    // Set the pool reference
     public void SetPool(IObjectPool<Bullet> bulletPool)
     {
         pool = bulletPool;
     }
 
+    // Launch the bullet with specified speed
     public void Launch()
     {
-        // Set the bullet's initial velocity to move upward (adjust based on shooting direction)
-        rb.velocity = transform.up * bulletSpeed;
+        rb.velocity = transform.up * bulletSpeed; // Adjust direction as needed
     }
 
-    // private void OnTriggerEnter2D(Collider2D collision)
+    // Return bullet to the pool when it goes off-screen
+    private void OnBecameInvisible()
+    {
+        pool?.Release(this);
+    }
+
+    public void Launch(Vector2 direction)
+    {
+        rb.velocity = direction * bulletSpeed; // Sesuaikan arah peluru
+    }
+
+
+    // private void OnTriggerEnter2D(Collider2D other)
     // {
-    //     // Check if the collided object has a HitboxComponent
-    //     HitboxComponent hitbox = collision.GetComponent<HitboxComponent>();
+    //     HitboxComponent hitbox = other.GetComponent<HitboxComponent>();
     //     if (hitbox != null)
     //     {
-    //         // Apply damage to the HitboxComponent
-    //         hitbox.Damage(damage);
-
-    //         // Release the bullet back to the pool after collision
-    //         pool?.Release(this);
+    //         hitbox.Damage(damage); // Apply damage to the target
+    //         pool?.Release(this);   // Return bullet to pool upon impact
     //     }
     // }
 
-    private void OnBecameInvisible()
+    // Reset the bullet when it's reused from the pool
+    private void OnEnable()
     {
-        // Return the bullet to the pool when it goes off-screen
-        pool?.Release(this);
+        rb.velocity = Vector2.zero; // Reset velocity to avoid unintended movement
+    }
+
+    private void OnDisable()
+    {
+        // Any additional reset logic if needed (e.g., trail effects or rotation)
+        transform.rotation = Quaternion.identity; // Reset rotation if needed
     }
 }
