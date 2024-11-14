@@ -1,30 +1,37 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D), typeof(HealthComponent))]
+[RequireComponent(typeof(Collider2D))]
 public class HitboxComponent : MonoBehaviour
 {
+    // Referensi ke komponen HealthComponent
     private HealthComponent health;
 
-    void Awake()
+    private void Awake()
     {
+        // Mendapatkan komponen HealthComponent dari objek ini
         health = GetComponent<HealthComponent>();
+        if (health == null)
+        {
+            Debug.LogError("HealthComponent tidak ditemukan pada objek ini.");
+        }
     }
 
-    // Method overload untuk menerima damage dari objek Bullet
+    // Method untuk menerima damage dari Bullet
     public void Damage(Bullet bullet)
     {
         if (health != null)
         {
-            health.Subtract(bullet.damage);
+            int damageAmount = bullet.GetDamage();
+            health.Subtract(damageAmount); // Mengurangi health berdasarkan damage bullet
         }
     }
 
-    // Method overload untuk menerima damage dalam bentuk integer
-    public void Damage(int damage)
+    // Method untuk menerima damage dari nilai integer
+    public void Damage(int damageAmount)
     {
         if (health != null)
         {
-            health.Subtract(damage);
+            health.Subtract(damageAmount); // Mengurangi health berdasarkan nilai damage yang diberikan
         }
     }
 }

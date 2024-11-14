@@ -1,28 +1,40 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
 [RequireComponent(typeof(Collider2D))]
-
 public class AttackComponent : MonoBehaviour
 {
-    public Bullet bulletPrefab;
-    private IObjectPool<Bullet> bulletPool;
+    // Properti untuk bullet dan damage
+    [SerializeField] private Bullet bullet;
+    [SerializeField] private int damage = 10;
 
     private void Start()
     {
-        bulletPool = new ObjectPool<Bullet>(() =>
+        // Pastikan collider objek ini diatur sebagai trigger
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null)
         {
-            Bullet bullet = Instantiate(bulletPrefab);
-            bullet.SetPool(bulletPool);
-            return bullet;
-        }, bullet => bullet.gameObject.SetActive(true), bullet => bullet.gameObject.SetActive(false));
+            collider.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogError("Collider tidak ditemukan pada objek ini.");
+        }
     }
 
-    public void PerformAttack()
+    private void OnTriggerEnter(Collider other)
     {
-        Bullet bullet = bulletPool.Get();
-        bullet.transform.position = transform.position;
-        bullet.transform.rotation = transform.rotation;
-        bullet.Launch();
+        // Cek apakah objek yang bertabrakan memiliki tag yang sama
+        if (other.CompareTag(gameObject.tag))
+        {
+            return; // Jika tag sama, abaikan tabrakan
+        }
+
+        // Cek apakah objek yang bertabrakan memiliki HitboxComponent
+        HitboxComponent hitbox = other.GetComponent<HitboxComponent>();
+        if (hitbox != null)
+        {
+            // Jika HitboxComponent ditemukan, panggil metode Damage pada objek tersebut
+            hitbox.Damage(damage);
+        }
     }
 }

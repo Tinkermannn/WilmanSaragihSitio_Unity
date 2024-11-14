@@ -199,6 +199,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: -1852742824012275859, guid: 2ca2b634f043ad74aa7e777099554840, type: 3}
+    - target: {fileID: 3816387632260678588, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: damage
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3892425531285872308, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.34716082
@@ -276,6 +280,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8116287894980178660, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1243909641259329885}
+    - targetCorrespondingSourceObject: {fileID: 8116287894980178660, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5160432773533042367}
   m_SourcePrefab: {fileID: 100100000, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
@@ -300,6 +307,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8116287894980178660, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
   m_PrefabInstance: {fileID: 1473091093436311703}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1243909641259329885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265326948812364403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43cd1b1e79bb1ea43991b530101efae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 2344106974457080619}
+  damage: 10
 --- !u!95 &5160432773533042367
 Animator:
   serializedVersion: 5

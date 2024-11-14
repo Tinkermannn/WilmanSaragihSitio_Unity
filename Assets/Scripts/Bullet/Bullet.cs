@@ -38,17 +38,6 @@ public class Bullet : MonoBehaviour
         rb.velocity = direction * bulletSpeed; // Sesuaikan arah peluru
     }
 
-
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     HitboxComponent hitbox = other.GetComponent<HitboxComponent>();
-    //     if (hitbox != null)
-    //     {
-    //         hitbox.Damage(damage); // Apply damage to the target
-    //         pool?.Release(this);   // Return bullet to pool upon impact
-    //     }
-    // }
-
     // Reset the bullet when it's reused from the pool
     private void OnEnable()
     {
@@ -57,7 +46,12 @@ public class Bullet : MonoBehaviour
 
     private void OnDisable()
     {
-        // Any additional reset logic if needed (e.g., trail effects or rotation)
         transform.rotation = Quaternion.identity; // Reset rotation if needed
+    }
+
+    // Method to return the damage value
+    public int GetDamage()
+    {
+        return damage;
     }
 }
