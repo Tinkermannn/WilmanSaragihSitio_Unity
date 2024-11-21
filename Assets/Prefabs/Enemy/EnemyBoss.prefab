@@ -78,12 +78,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a545142e4ae579f4f9fdd1b53699c63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  damage: 10
-  level: 1
+  level: 3
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
   shootInterval: 1
   speed: 5
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 3816387632260678588, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
   bulletSpawnPoint: {fileID: 6325612847188812050}
 --- !u!50 &8743660779328245940
 Rigidbody2D:

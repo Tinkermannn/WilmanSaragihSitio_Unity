@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class EnemyTargeting : Enemy
 {
-    public float speed = 5f; // Speed toward the player
+    public float speed = 5f; // Kecepatan enemy bergerak menuju player
 
     void Update()
     {
-        // Check if playerTransform is valid
+        // Memeriksa apakah playerTransform valid (player ada)
         if (playerTransform != null)
         {
-            // Calculate direction toward the player
+            // Menghitung arah dari enemy menuju player
             Vector2 direction = (playerTransform.position - transform.position).normalized;
-            // Move the enemy toward the player
+            // Menggerakkan enemy menuju player dengan kecepatan yang sudah ditentukan
             transform.Translate(direction * speed * Time.deltaTime);
         }
     }
 
-    // Collision detection with player
+    // Deteksi tabrakan dengan player
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Cek apakah objek yang terkena tabrakan adalah player
         if (collision.CompareTag("Player"))
         {
-            Destroy(gameObject); // Destroy enemy on collision
+            // Hapus objek enemy ketika bertabrakan dengan player
+            Destroy(gameObject);
         }
     }
 }

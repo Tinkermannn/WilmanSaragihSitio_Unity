@@ -83,6 +83,7 @@ MonoBehaviour:
   shootIntervalInSeconds: 0.1
   bulletPrefab: {fileID: 2344106974457080619}
   bulletSpawnPoint: {fileID: 2227015800234786337}
+  parentTransform: {fileID: 0}
 --- !u!212 &8204017766229349977
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -268,6 +269,46 @@ PrefabInstance:
       value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: 0.008902907
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
+      value: 0.19428563
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: -0.078570604
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: 0.13095859
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
+      value: -0.035804212
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: 0.05901766
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
+      value: 0.05806172
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
+      value: 0.07682371
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
+      value: 0.08302188
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
+      value: 0.13986176
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584899887309301772, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
       value: 0.5
       objectReference: {fileID: 0}
@@ -281,7 +322,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8116287894980178660, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 1243909641259329885}
+      addedObject: {fileID: 9089102756178589265}
     - targetCorrespondingSourceObject: {fileID: 8116287894980178660, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5160432773533042367}
@@ -307,7 +348,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8116287894980178660, guid: 2812f9fafa13b3744a9d796a2ce0ee9a, type: 3}
   m_PrefabInstance: {fileID: 1473091093436311703}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1243909641259329885
+--- !u!114 &9089102756178589265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

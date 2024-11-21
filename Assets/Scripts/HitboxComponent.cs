@@ -3,35 +3,33 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class HitboxComponent : MonoBehaviour
 {
-    // Referensi ke komponen HealthComponent
-    private HealthComponent health;
+    [SerializeField]
+    HealthComponent health;
 
-    private void Awake()
+    Collider2D area;
+
+    private InvincibilityComponent invincibilityComponent;
+
+
+    void Start()
     {
-        // Mendapatkan komponen HealthComponent dari objek ini
-        health = GetComponent<HealthComponent>();
-        if (health == null)
-        {
-            Debug.LogError("HealthComponent tidak ditemukan pada objek ini.");
-        }
+        area = GetComponent<Collider2D>();
+        invincibilityComponent = GetComponent<InvincibilityComponent>();
     }
 
-    // Method untuk menerima damage dari Bullet
     public void Damage(Bullet bullet)
     {
+        if (invincibilityComponent != null && invincibilityComponent.isInvincible) return;
+
         if (health != null)
-        {
-            int damageAmount = bullet.GetDamage();
-            health.Subtract(damageAmount); // Mengurangi health berdasarkan damage bullet
-        }
+            health.Subtract(bullet.damage);
     }
 
-    // Method untuk menerima damage dari nilai integer
-    public void Damage(int damageAmount)
+    public void Damage(int damage)
     {
+        if (invincibilityComponent != null && invincibilityComponent.isInvincible) return;
+
         if (health != null)
-        {
-            health.Subtract(damageAmount); // Mengurangi health berdasarkan nilai damage yang diberikan
-        }
+            health.Subtract(damage);
     }
 }

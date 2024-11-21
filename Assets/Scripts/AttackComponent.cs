@@ -3,38 +3,28 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class AttackComponent : MonoBehaviour
 {
-    // Properti untuk bullet dan damage
-    [SerializeField] private Bullet bullet;
-    [SerializeField] private int damage = 10;
+    public Bullet bullet;
+    public int damage;
 
-    private void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // Pastikan collider objek ini diatur sebagai trigger
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null)
-        {
-            collider.isTrigger = true;
-        }
-        else
-        {
-            Debug.LogError("Collider tidak ditemukan pada objek ini.");
-        }
-    }
+        if (other.gameObject.CompareTag(gameObject.tag)) return;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Cek apakah objek yang bertabrakan memiliki tag yang sama
-        if (other.CompareTag(gameObject.tag))
+        if (other.GetComponent<HitboxComponent>() != null)
         {
-            return; // Jika tag sama, abaikan tabrakan
-        }
+            HitboxComponent hitbox = other.GetComponent<HitboxComponent>();
 
-        // Cek apakah objek yang bertabrakan memiliki HitboxComponent
-        HitboxComponent hitbox = other.GetComponent<HitboxComponent>();
-        if (hitbox != null)
-        {
-            // Jika HitboxComponent ditemukan, panggil metode Damage pada objek tersebut
+            if (bullet != null)
+            {
+                hitbox.Damage(bullet.damage);
+            }
+
             hitbox.Damage(damage);
+        }
+
+        if (other.GetComponent<InvincibilityComponent>() != null)
+        {
+            other.GetComponent<InvincibilityComponent>().TriggerInvincibility();
         }
     }
 }

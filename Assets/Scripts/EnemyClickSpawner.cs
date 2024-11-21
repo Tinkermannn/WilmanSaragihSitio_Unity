@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
+
 public class EnemyClickSpawner : MonoBehaviour
 {
     [SerializeField] private Enemy[] enemyVariants;
     [SerializeField] private int selectedVariant = 0;
 
+
+    // Start is called before the first frame update
     void Start()
     {
-        Assert.IsTrue(enemyVariants.Length > 0, "Please add at least one Enemy prefab!");
+       Assert.IsTrue(enemyVariants.Length > 0, "Tambahkan setidaknya 1 Prefab Enemy terlebih dahulu!");
     }
-
     private void Update()
     {
-        // Select enemy variant based on number keys
         for (int i = 1; i <= enemyVariants.Length; i++)
         {
             if (Input.GetKeyDown(i.ToString()))
@@ -22,18 +23,21 @@ public class EnemyClickSpawner : MonoBehaviour
             }
         }
 
-        // Spawn enemy on right-click
+
         if (Input.GetMouseButtonDown(1))
         {
             SpawnEnemy();
         }
     }
-
     private void SpawnEnemy()
     {
         if (selectedVariant < enemyVariants.Length)
         {
-            Instantiate(enemyVariants[selectedVariant], Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+            Instantiate(enemyVariants[selectedVariant]);
         }
     }
+
+
 }
+
+

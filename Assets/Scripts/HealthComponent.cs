@@ -1,27 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-// Komponen yang bisa ditambahkan ke setiap GameObject yang membutuhkan health
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField] private int maxHealth; // Batas maksimum health
+    public int maxHealth = 10;
+
     private int health;
 
-    // Properti read-only untuk mendapatkan nilai health saat ini
-    public int Health => health;
-
-    // Initialize the health value to maxHealth when the object is created
-    private void Start()
+    void Awake()
     {
-        health = maxHealth; // Inisialisasi health ke maxHealth
+        health = maxHealth;
     }
 
-    // Method untuk mengurangi health
-    public void Subtract(int damage)
+    public void Subtract(int amount)
     {
-        health -= damage; // Kurangi nilai health
+        health -= amount;
+
         if (health <= 0)
         {
-            Destroy(gameObject); // Hapus objek jika health <= 0
+            Destroy(gameObject);
         }
+    }
+
+    public int GetHealth()
+    {
+        return health;
     }
 }
