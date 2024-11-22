@@ -4,26 +4,35 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Enemy Prefabs")]
-    public Enemy spawnedEnemy; // Prefab enemy yang akan di-spawn
+    public Enemy enemyPrefab;
 
     [SerializeField] private int minimumKillsToIncreaseSpawnCount = 3;
-    public int totalKill = 0; // Total kill global
-    private int totalKillWave = 0; // Total kill dalam satu wave
+    public int totalKill = 0;
+    private int totalKillWave = 0;
 
     [SerializeField] private float spawnInterval = 3f;
 
     [Header("Spawned Enemies Counter")]
-    public int spawnCount = 0; // Jumlah yang di-spawn saat ini
-    public int defaultSpawnCount = 1; // Default jumlah spawn
-    public int spawnCountMultiplier = 1; // Multiplikasi spawn
-    public int multiplierIncreaseCount = 1; // Berapa kali multiplier meningkat
+    public int spawnCount = 0;
+    public int defaultSpawnCount = 1;
+    public int spawnCountMultiplier = 1;
+    public int multiplierIncreaseCount = 1;
 
-    public CombatManager combatManager; // Referensi ke manajer combat
+    public CombatManager combatManager;
 
     public bool isSpawning = false;
 
     private void Start()
     {
+        if (combatManager == null)
+        {
+            combatManager = FindObjectOfType<CombatManager>();
+            if (combatManager == null)
+            {
+                Debug.LogError("CombatManager tidak ditemukan! Pastikan ada di scene.");
+            }
+        }
+
         StartCoroutine(SpawnEnemies());
     }
 
@@ -32,7 +41,6 @@ public class EnemySpawner : MonoBehaviour
         CheckKillProgress();
     }
 
-    // Coroutine untuk melakukan spawn secara berkala
     private IEnumerator SpawnEnemies()
     {
         while (true)
@@ -42,36 +50,38 @@ public class EnemySpawner : MonoBehaviour
                 for (int i = 0; i < spawnCount; i++)
                 {
                     SpawnEnemy();
-                    yield return new WaitForSeconds(spawnInterval); // Jeda antar spawn
+                    yield return new WaitForSeconds(spawnInterval);
                 }
+                isSpawning = false; // Hentikan spawning setelah selesai
             }
 
             yield return null;
         }
     }
 
-    // Fungsi untuk memeriksa progres kill dan menyesuaikan jumlah spawn
     private void CheckKillProgress()
     {
         if (totalKillWave >= minimumKillsToIncreaseSpawnCount)
         {
             spawnCountMultiplier += multiplierIncreaseCount;
             spawnCount = defaultSpawnCount * spawnCountMultiplier;
-            totalKillWave = 0; // Reset kill wave setelah spawn count bertambah
+            totalKillWave = 0;
         }
     }
 
-    // Fungsi untuk melakukan spawn enemy
     private void SpawnEnemy()
     {
-        if (spawnedEnemy != null)
+        if (enemyPrefab != null)
         {
-            Instantiate(spawnedEnemy, transform.position, Quaternion.identity);
-            spawnCount--; // Kurangi jumlah yang perlu di-spawn di wave ini
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            spawnCount--;
+        }
+        else
+        {
+            Debug.LogError("Enemy prefab tidak diatur di EnemySpawner!");
         }
     }
 
-    // Fungsi ini dipanggil oleh CombatManager saat enemy terbunuh
     public void OnEnemyKilled()
     {
         totalKill++;

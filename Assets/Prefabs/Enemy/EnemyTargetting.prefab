@@ -92,6 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
   speed: 2
 --- !u!50 &3484180422890532097
 Rigidbody2D:

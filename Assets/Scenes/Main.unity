@@ -330,6 +330,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 44340741}
     m_Modifications:
     - target: {fileID: 39252558804623485, guid: 8c3964409a2fb1b4690522894d5db8cf, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 8242391133072485367, guid: 9900b9e1ccff90c488d13e7cb9a3bdab, type: 3}
+    - target: {fileID: 39252558804623485, guid: 8c3964409a2fb1b4690522894d5db8cf, type: 3}
       propertyPath: spawnedEnemy
       value: 
       objectReference: {fileID: 8242391133072485367, guid: 9900b9e1ccff90c488d13e7cb9a3bdab, type: 3}
@@ -460,6 +464,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7089825688396759870, guid: 8ff8fab76f1985a41b61fb94cbcda9b7, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 5907625131721581544, guid: 65a1a0863f6985949ac276b0168c8f5f, type: 3}
+    - target: {fileID: 7089825688396759870, guid: 8ff8fab76f1985a41b61fb94cbcda9b7, type: 3}
       propertyPath: spawnedEnemy
       value: 
       objectReference: {fileID: 5907625131721581544, guid: 65a1a0863f6985949ac276b0168c8f5f, type: 3}
@@ -496,6 +504,10 @@ PrefabInstance:
       value: EnemyTargettingSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 7013574786023694070, guid: d4ced31cb9a3e5a40904e116fcc50077, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 2915081185087646992, guid: 52dbb07d3c7f2bb41893c0d07a7b253e, type: 3}
+    - target: {fileID: 7013574786023694070, guid: d4ced31cb9a3e5a40904e116fcc50077, type: 3}
       propertyPath: spawnedEnemy
       value: 
       objectReference: {fileID: 2915081185087646992, guid: 52dbb07d3c7f2bb41893c0d07a7b253e, type: 3}
@@ -503,6 +515,14 @@ PrefabInstance:
       propertyPath: combatManager
       value: 
       objectReference: {fileID: 44340740}
+    - target: {fileID: 7013574786023694070, guid: d4ced31cb9a3e5a40904e116fcc50077, type: 3}
+      propertyPath: defaultSpawnCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013574786023694070, guid: d4ced31cb9a3e5a40904e116fcc50077, type: 3}
+      propertyPath: minimumKillsToIncreaseSpawnCount
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7225554362530595258, guid: d4ced31cb9a3e5a40904e116fcc50077, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -617,9 +637,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4801356797101119747, guid: ff6d4e6d0fff7ff4eac6c9725ea4df79, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 3115892008677880635, guid: 7b08f45a4a3def542a9224afc74e7a71, type: 3}
+    - target: {fileID: 4801356797101119747, guid: ff6d4e6d0fff7ff4eac6c9725ea4df79, type: 3}
       propertyPath: spawnedEnemy
       value: 
-      objectReference: {fileID: 1553174841738565387, guid: 7b08f45a4a3def542a9224afc74e7a71, type: 3}
+      objectReference: {fileID: 3115892008677880635, guid: 7b08f45a4a3def542a9224afc74e7a71, type: 3}
     - target: {fileID: 4801356797101119747, guid: ff6d4e6d0fff7ff4eac6c9725ea4df79, type: 3}
       propertyPath: combatManager
       value: 

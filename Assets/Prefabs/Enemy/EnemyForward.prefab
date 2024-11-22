@@ -91,7 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d89463fe0a323b45897d7c861e93130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
+  level: 1
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
   speed: 5
 --- !u!50 &8113220418914812498
 Rigidbody2D:

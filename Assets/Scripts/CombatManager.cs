@@ -4,94 +4,114 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour
 {
     [Header("Enemy Spawners")]
-    public EnemySpawner[] enemySpawners; // Daftar semua spawner yang aktif
+    public EnemySpawner[] enemySpawners;
 
     [Header("Wave Settings")]
-    public float timer = 0f; // Timer untuk wave interval
-    [SerializeField] private float waveInterval = 5f; // Interval antar wave
-    public int waveNumber = 1; // Nomor wave saat ini
-    public int totalEnemies = 0; // Total musuh di wave saat ini
+    public float timer = 0f;
+    [SerializeField] private float waveInterval = 5f;
+    public int waveNumber = 1;
+    public int totalEnemies = 0;
 
-    private bool waveInProgress = false; // Status apakah wave sedang berjalan
+    private bool isWaitingForNextWave = true;
+    private bool waveInProgress = false;
 
     private void Start()
     {
-        StartCoroutine(ManageWaves());
+        // Nonaktifkan semua spawner di awal
+        foreach (var spawner in enemySpawners)
+        {
+            spawner.isSpawning = false;
+        }
+        timer = waveInterval;
     }
 
     private void Update()
     {
-        if (waveInProgress)
+        if (isWaitingForNextWave)
+        {
+            // Update timer
+            timer -= Time.deltaTime;
+            
+            // Cek apakah timer sudah habis
+            if (timer <= 0)
+            {
+                isWaitingForNextWave = false;
+                timer = waveInterval;
+                StartWave();
+            }
+        }
+        else if (waveInProgress)
         {
             UpdateEnemyCount();
         }
     }
 
-    // Coroutine untuk mengatur siklus wave
-    private IEnumerator ManageWaves()
-    {
-        while (true)
-        {
-            // Tunggu waktu wave interval sebelum memulai wave berikutnya
-            yield return new WaitForSeconds(waveInterval);
-
-            // Memulai wave baru
-            StartWave();
-
-            // Tunggu hingga wave selesai
-            while (waveInProgress)
-            {
-                yield return null;
-            }
-        }
-    }
-
-    // Memulai wave baru
     private void StartWave()
     {
-        Debug.Log($"Wave {waveNumber} dimulai!");
-
         waveInProgress = true;
         totalEnemies = 0;
 
-        // Atur jumlah enemy berdasarkan spawner
         foreach (var spawner in enemySpawners)
         {
-            spawner.spawnCount = spawner.defaultSpawnCount * waveNumber; // Tingkatkan spawn berdasarkan wave
-            totalEnemies += spawner.spawnCount; // Hitung total musuh di wave ini
-            spawner.isSpawning = true; // Aktifkan spawner
+            // Pastikan enemyPrefab sudah diatur
+            if (spawner.enemyPrefab != null)
+            {
+                int enemyLevel = spawner.enemyPrefab.level;
+                
+                // Aktifkan spawner jika level musuh sesuai dengan wave
+                if (enemyLevel == waveNumber)
+                {
+                    spawner.spawnCount = spawner.defaultSpawnCount;
+                    totalEnemies += spawner.spawnCount;
+                    spawner.isSpawning = true;
+                    Debug.Log($"Spawner {spawner.gameObject.name} aktif dengan {spawner.spawnCount} enemy level {enemyLevel}");
+                }
+                else
+                {
+                    spawner.spawnCount = 0;
+                    spawner.isSpawning = false;
+                }
+            }
+        }
+
+        if (totalEnemies == 0)
+        {
+            EndWave();
         }
     }
 
-    // Perbarui jumlah enemy yang tersisa di wave ini
     private void UpdateEnemyCount()
     {
         totalEnemies = 0;
 
-        // Hitung total musuh aktif dari semua spawner
         foreach (var spawner in enemySpawners)
         {
-            totalEnemies += spawner.spawnCount;
+            if (spawner.isSpawning)
+            {
+                totalEnemies += spawner.spawnCount;
+            }
         }
 
-        // Jika tidak ada musuh tersisa, akhiri wave
         if (totalEnemies <= 0)
         {
             EndWave();
         }
     }
 
-    // Akhiri wave saat ini dan persiapkan wave berikutnya
     private void EndWave()
     {
         Debug.Log($"Wave {waveNumber} selesai!");
-        waveNumber++; // Naikkan nomor wave
-        waveInProgress = false; // Tandai bahwa wave selesai
-
-        // Nonaktifkan spawner hingga wave berikutnya
+        
+        // Nonaktifkan semua spawner
         foreach (var spawner in enemySpawners)
         {
             spawner.isSpawning = false;
         }
+
+        // Siapkan wave berikutnya
+        waveNumber++;
+        waveInProgress = false;
+        isWaitingForNextWave = true;
+        timer = waveInterval;
     }
 }

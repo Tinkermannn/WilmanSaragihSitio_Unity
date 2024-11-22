@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     [Header("Enemy Stats")]
-    [SerializeField] protected int level = 1; // Level musuh
+    [SerializeField] public int level = 1; // Level musuh
 
     private Rigidbody2D rb; // Referensi Rigidbody2D
     protected Transform playerTransform; // Referensi ke Transform player
