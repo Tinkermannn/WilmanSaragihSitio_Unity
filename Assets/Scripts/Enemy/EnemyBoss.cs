@@ -35,20 +35,22 @@ public class EnemyBoss : Enemy
         // Initialize the shoot timer
         shootTimer = shootInterval;
 
-        // Tentukan posisi spawn dan arah gerakan berdasarkan sisi layar
+        // Tentukan ukuran layar
         float screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
+        float screenHeight = Camera.main.orthographicSize;
+
         Vector2 spawnPosition;
 
         if (Random.value < 0.5f)
         {
             // Spawn dari sisi kiri layar
-            spawnPosition = new Vector2(-screenWidth - 1, Random.Range(-Camera.main.orthographicSize, Camera.main.orthographicSize));
+            spawnPosition = new Vector2(-screenWidth - 1, Random.Range(0, screenHeight)); // Tengah hingga atas
             direction = Vector2.right; // Gerak ke kanan
         }
         else
         {
             // Spawn dari sisi kanan layar
-            spawnPosition = new Vector2(screenWidth + 1, Random.Range(-Camera.main.orthographicSize, Camera.main.orthographicSize));
+            spawnPosition = new Vector2(screenWidth + 1, Random.Range(0, screenHeight)); // Tengah hingga atas
             direction = Vector2.left; // Gerak ke kiri
         }
 

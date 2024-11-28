@@ -10,7 +10,6 @@ public class HitboxComponent : MonoBehaviour
 
     private InvincibilityComponent invincibilityComponent;
 
-
     void Start()
     {
         area = GetComponent<Collider2D>();

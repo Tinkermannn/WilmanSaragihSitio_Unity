@@ -73,7 +73,8 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyPrefab != null)
         {
-            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            Enemy enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            enemy.SetLevel(combatManager.waveNumber); // Set level sesuai wave
             spawnCount--;
         }
         else

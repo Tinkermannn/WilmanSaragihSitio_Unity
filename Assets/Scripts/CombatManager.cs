@@ -17,7 +17,7 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
-        // Nonaktifkan semua spawner di awal
+        // Disable all spawners at the start
         foreach (var spawner in enemySpawners)
         {
             spawner.isSpawning = false;
@@ -31,8 +31,8 @@ public class CombatManager : MonoBehaviour
         {
             // Update timer
             timer -= Time.deltaTime;
-            
-            // Cek apakah timer sudah habis
+
+            // Check if the timer has expired
             if (timer <= 0)
             {
                 isWaitingForNextWave = false;
@@ -53,18 +53,18 @@ public class CombatManager : MonoBehaviour
 
         foreach (var spawner in enemySpawners)
         {
-            // Pastikan enemyPrefab sudah diatur
+            // Ensure enemyPrefab is set
             if (spawner.enemyPrefab != null)
             {
                 int enemyLevel = spawner.enemyPrefab.level;
-                
-                // Aktifkan spawner jika level musuh sesuai dengan wave
+
+                // Activate spawner if enemy level matches the wave
                 if (enemyLevel == waveNumber)
                 {
                     spawner.spawnCount = spawner.defaultSpawnCount;
                     totalEnemies += spawner.spawnCount;
                     spawner.isSpawning = true;
-                    Debug.Log($"Spawner {spawner.gameObject.name} aktif dengan {spawner.spawnCount} enemy level {enemyLevel}");
+                    Debug.Log($"Spawner {spawner.gameObject.name} active with {spawner.spawnCount} enemies of level {enemyLevel}");
                 }
                 else
                 {
@@ -100,18 +100,34 @@ public class CombatManager : MonoBehaviour
 
     private void EndWave()
     {
-        Debug.Log($"Wave {waveNumber} selesai!");
-        
-        // Nonaktifkan semua spawner
+        Debug.Log($"Wave {waveNumber} complete!");
+
+        // Disable all spawners
         foreach (var spawner in enemySpawners)
         {
             spawner.isSpawning = false;
         }
 
-        // Siapkan wave berikutnya
+        // Prepare for the next wave
         waveNumber++;
         waveInProgress = false;
         isWaitingForNextWave = true;
         timer = waveInterval;
+    }
+
+    // New method to get remaining enemies (based on active spawners)
+    public int GetRemainingEnemies()
+    {
+        int remainingEnemies = 0;
+
+        foreach (var spawner in enemySpawners)
+        {
+            if (spawner.isSpawning)
+            {
+                remainingEnemies += spawner.spawnCount;
+            }
+        }
+
+        return remainingEnemies;
     }
 }

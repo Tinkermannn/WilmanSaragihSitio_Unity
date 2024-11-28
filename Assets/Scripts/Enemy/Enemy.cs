@@ -67,9 +67,14 @@ public class Enemy : MonoBehaviour
         return level;
     }
 
-    private void OnDestroy()
+  private void OnDestroy()
     {
-        // Memanggil event saat musuh dihancurkan
-        enemyKilledEvent.Invoke();
+        // Invoke event sebelum object dihancurkan
+        if (enemyKilledEvent != null)
+        {
+            UI.AddPoints(level);
+            enemyKilledEvent.Invoke();
+        }
     }
+    
 }
